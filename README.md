@@ -1,2 +1,2 @@
 # Petstagram
-Workshop Project from my SoftUni Python-Web Courses.
+Django Project from my SoftUni Python-Web Courses.
