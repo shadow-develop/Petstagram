@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.validators import MinLengthValidator
 from django.db import models
 
@@ -33,7 +35,7 @@ class Profile(models.Model):
         )
     )
 
-    picture = models.URLField()
+    picture = models.ImageField()
 
     date_of_birth = models.DateField(
         null=True,
@@ -53,6 +55,8 @@ class Profile(models.Model):
     gender = models.CharField(
         max_length=max([len(x) for x, _ in GENDERS]),
         choices=[(x, x) for _, x in GENDERS],
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
@@ -84,6 +88,10 @@ class Pet(models.Model):
         null=True,
         blank=True,
     )
+
+    @property
+    def age(self):
+        return datetime.datetime.now().year - self.date_of_birth.year
 
     user_profile = models.ForeignKey(
         Profile,
